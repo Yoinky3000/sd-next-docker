@@ -3,7 +3,7 @@ variable "REGISTRY" {
 }
 
 variable "IMAGE" {
-    default = "yoink3000/sd-next-docker"
+    default = "yoinky3000/sd-next-docker"
 }
 
 variable "RELEASE" {
