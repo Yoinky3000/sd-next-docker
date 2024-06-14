@@ -11,7 +11,7 @@ A docker image to automatically setup everything you needed to run SD Next in a 
 * Support CUDA 11.8 ~ 12.5
 * Python 3.10
 * PyTorch 2.3.1
-* SD Next ([84f9caa](https://github.com/vladmandic/automatic/tree/84f9caaffe8eae40f2f597c09faccb59a4eab2b7))
+* SD Next ([a3ffd47](https://github.com/vladmandic/automatic/tree/a3ffd478e54c1735a1affc8b4760cef81594c293))
 * Jupyter Lab Installed
 
 ## Features
