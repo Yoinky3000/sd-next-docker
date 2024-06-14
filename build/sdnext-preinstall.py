@@ -52,6 +52,7 @@ def main():
         installer.log.warning(f'See log file for more details: {installer.log_file}')
 
     installer.install("matplotlib-inline")
+    installer.install("ipython")
     installer.install("basicsr")
     installer.install("gfpgan")
 main()
