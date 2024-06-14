@@ -8,7 +8,7 @@ A docker image to automatically setup everything you needed to run SD Next in a 
 
 ## Image Configurations
 * Ubuntu 22.04 LTS
-* Support CUDA 11.8 ~ 12.5
+* Support CUDA from 11.8 to 12.5
 * Python 3.10
 * PyTorch 2.3.1
 * SD Next ([a3ffd47](https://github.com/vladmandic/automatic/tree/a3ffd478e54c1735a1affc8b4760cef81594c293))
@@ -18,7 +18,7 @@ A docker image to automatically setup everything you needed to run SD Next in a 
 * [Original + Diffusers Backend supported](https://github.com/vladmandic/automatic?tab=readme-ov-file#backend-support)
 * [Vast majority of model types supported](https://github.com/vladmandic/automatic?tab=readme-ov-file#model-support)
 * Plug'n'Play (packages pre-installed)
-* Easy management(start, git version, download from links) with jupyter notebook
+* Easy management(start, git version, download from links) with pre-built jupyter notebook
 
 ## Deploy
 * ### Runpod
