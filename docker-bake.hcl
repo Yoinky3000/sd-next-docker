@@ -78,6 +78,6 @@ target "default" {
     }
     tags = autoTag("${TAG}")
     platforms = ["linux/amd64"]
-    cache-from = ["${autoTag("${TAG}")[0]}"]
-    cache-to = ["${autoTag("${TAG}")[0]}"]
+    cache-from = ["${autoTag("${TAG}")[0]}-cache"]
+    cache-to = ["${autoTag("${TAG}")[0]}-cache"]
 }
