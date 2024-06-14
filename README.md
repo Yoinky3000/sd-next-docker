@@ -71,7 +71,7 @@ docker run -d \
 | JUPYTER_LAB_PASSWORD | This will be used as the password for jupyter lab | None (no password is required to access the lab)  |
 
 ## Contribution
-Contributions are welcome! Create an issue if you have any problem with this image, or create pull request if you want to add new features
+Contributions are welcome! Create an issue if you have any problem with this image, or create pull request if you want to add new features in [this repo](https://github.com/Yoinky3000/sd-next-docker)
 
 ## Disclaimer
 The authors of this project are not responsible for any content generated using this interface.
