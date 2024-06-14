@@ -7,11 +7,11 @@ variable "IMAGE" {
 }
 
 variable "RELEASE" {
-    default = "1.0.0"
+    default = "1.0.1"
 }
 
 variable "SD_NEXT_COMMIT" {
-    default = "84f9caaffe8eae40f2f597c09faccb59a4eab2b7"
+    default = "a3ffd478e54c1735a1affc8b4760cef81594c293"
 }
 
 variable TAG_INFO {
