@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 
-apt update -y
-apt upgrade -y
+echo Updating apt...
+apt update -y > /dev/null
+
+echo Upgrading apt...
+apt upgrade -y > /dev/null
+
+echo Installing apt packages...
 apt install -y git \
     python3.10 \
     pythonpy \
     python3.10-venv \
     python3-pip \
     curl \
-    wget
+    wget > /dev/null
 
-pip install jupyterlab
+echo Installing Jupyter Lab...
+pip install jupyterlab > /dev/null

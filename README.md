@@ -24,6 +24,8 @@ A docker image to automatically setup everything you needed to run SD Next in a 
 * ### Runpod
 You can deploy this image in [Runpod](https://runpod.io?ref=2v9nfixx) with this [template](https://runpod.io/console/deploy?template=joh7y33050&ref=2v9nfixx)<br>
 The template use cu124 version, so please remember to use the pod that support CUDA 12.4
+* ### Vast.ai
+coming soon...
 * ### Local
 Run the following command in your terminal:
 ```bash
