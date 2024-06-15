@@ -1,1 +1,3 @@
 *.bat
+test.Dockerfile
+docker-bake.test.hcl

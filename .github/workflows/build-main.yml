@@ -5,14 +5,12 @@ env:
 
 on:
   push:
-    paths:
-      - '.github/workflows/build-main.yml'
-      - 'build/**'
-      - 'scripts/**'
-      - 'SD Next/**'
-      - 'workspace/**'
-      - 'docker-bake.hcl'
-      - 'Dockerfile'
+    paths-ignore:
+      - '.github/workflows/build-dev.yml'
+      - '.gitignore'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+      - 'README.md'
     branches:
       - 'main'
 

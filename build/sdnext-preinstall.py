@@ -38,9 +38,13 @@ def main():
     installer.set_environment()
 
     DEFAULT_WHL = os.environ.get('DEFAULT_WHL')
+    TORCH_COMMAND = os.environ.get('TORCH_COMMAND')
     if DEFAULT_WHL.startswith("cu"):
-        from sdpi.gpu import install
-        install()
+        from sdpi.cuda import install
+        install(TORCH_COMMAND)
+    elif DEFAULT_WHL.startswith("rocm"):
+        from sdpi.rocm import install
+        install(TORCH_COMMAND)
 
     installer.check_diffusers()
     installer.install_requirements()
