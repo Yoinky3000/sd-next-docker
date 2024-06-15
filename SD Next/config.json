@@ -1,13 +1,4 @@
 {
-  "sdp_options": [
-    "Flash attention",
-    "Memory attention",
-    "Math attention"
-  ],
-  "xformers_options": [
-    "Flash attention"
-  ],
-  "opt_channelslast": true,
   "cuda_compile": [],
   "nncf_compress_weights": [],
   "ipex_optimize": [],
@@ -42,5 +33,7 @@
   "uni_pc_lower_order_final": true,
   "uni_pc_order": 2,
   "uiux_hide_legacy": false,
-  "diffusers_vae_upcast": "false"
+  "diffusers_vae_upcast": "false",
+  "samples_format": "png",
+  "jpeg_quality": 100
 }

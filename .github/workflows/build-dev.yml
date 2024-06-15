@@ -1,15 +1,16 @@
 name: Dev Branch Publish
 
+env:
+  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+
 on:
   push:
-    paths:
-      - '.github/workflows/build-dev.yml'
-      - 'build/**'
-      - 'scripts/**'
-      - 'SD Next/**'
-      - 'workspace/**'
-      - 'docker-bake.hcl'
-      - 'Dockerfile'
+    paths-ignore:
+      - '.github/workflows/build-main.yml'
+      - '.gitignore'
+      - 'CHANGELOG.md'
+      - 'LICENSE'
+      - 'README.md'
     branches:
       - 'dev'
 
@@ -18,8 +19,19 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  Nvidia-CUDA:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - cu118
+          - cu120
+          - cu121
+          - cu122
+          - cu123
+          - cu124
+          - cu125
     steps:
       -
         name: Checkout
@@ -28,6 +40,7 @@ jobs:
         name: Free Disk Space
         uses: jlumbroso/free-disk-space@main
         with:
+          tool-cache: true
           android: true
           dotnet: true
           haskell: true
@@ -48,4 +61,49 @@ jobs:
         uses: docker/bake-action@v4
         with:
           push: true
-          targets: dev
+          targets: "dev-${{ matrix.target }}"
+          provenance: false
+          files: docker-bake.cuda.hcl
+  AMD-ROCm:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - rocm5-5
+          - rocm5-6
+          - rocm5-7
+          - rocm6-0
+          - rocm6-1
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: true
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/bake-action@v4
+        with:
+          push: true
+          targets: "dev-${{ matrix.target }}"
+          provenance: false
+          files: docker-bake.rocm.hcl
