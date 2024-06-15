@@ -21,7 +21,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  NVidia-CUDA:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -64,3 +64,4 @@ jobs:
           push: true
           targets: "dev-${{ matrix.target }}"
           provenance: false
+          files: docker-bake.cuda.hcl
