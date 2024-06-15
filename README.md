@@ -9,6 +9,7 @@ A docker image to automatically setup everything you needed to run SD Next in a 
 ## Image Configurations
 * Ubuntu 22.04 LTS
 * Support CUDA from 11.8 to 12.5
+* Support ROCm from 5.5 to 6.1
 * Python 3.10
 * PyTorch 2.3.1
 * SD Next ([a3ffd47](https://github.com/vladmandic/automatic/tree/a3ffd478e54c1735a1affc8b4760cef81594c293))
@@ -23,38 +24,57 @@ A docker image to automatically setup everything you needed to run SD Next in a 
 ## Deploy
 * ### Runpod
 You can deploy this image in [Runpod](https://runpod.io?ref=2v9nfixx) with this [template](https://runpod.io/console/deploy?template=joh7y33050&ref=2v9nfixx)<br>
-The template use cu124 version, so please remember to use the pod that support CUDA 12.4
+The template use cu121 version, so please remember to use the pod that support CUDA 12.1
 * ### Vast.ai
 You can deploy this image in [Vast.ai](https://cloud.vast.ai/?ref_id=140145) with this [template](https://cloud.vast.ai/?ref_id=140145&template_id=109d8fe5c6d64db9a20702b88ef8df1f)<br>
-The template use cu124 version, so please remember to use the instance that support CUDA 12.4
+The template use cu121 version, so please remember to use the instance that support CUDA 12.1
 * ### Local
-Run the following command in your terminal:
+Run the following command in your terminal
+For Nvidia CUDA:
 ```bash
 docker run -d \
   --gpus all \
   -v /workspace \
   -p PORT:3000 \
   -p PORT:3001 \
-  -e JUPYTER_LAB_PASSWORD="abcd1234" \
+  -e JUPYTER_LAB_PASSWORD="" \
   yoinky3000/sd-next-docker:x.x.x-cuxxx
+```
+For AMD ROCm
+```bash
+docker run -d \
+  --gpus all \
+  -v /workspace \
+  -p PORT:3000 \
+  -p PORT:3001 \
+  -e JUPYTER_LAB_PASSWORD="" \
+  yoinky3000/sd-next-docker:x.x.x-rocmx.x
 ```
 
 > [!NOTE]
 >
-> Replace x.x.x with the version of this image you want to use (`:latest` tag will install latest version for CUDA 12.4)
+> `:latest` points to `:latest-cuda` points to latest tag for CUDA
 >
-> You will need to replace `PORT` with the port number you want the apps to listen to,
+> `:latest-rocm` points to latest tag for ROCm
+>
+> You will need to replace `PORT` with the port number you want the apps to expose to,
 > For the details of the ports, please scroll down to the [PORTS](#PORTS) section
 >
-> You can change the values of JUPYTER_LAB_PASSWORD, or remove it from the command as you like
+> You can change the value of JUPYTER_LAB_PASSWORD if you need it
 
 > [!IMPORTANT]
-> Each version of the image will be built for each [CUDA version listed here](#Image-Configurations) specifically
+>
+> Each version of the image will be built for each [CUDA and ROCm version listed here](#Image-Configurations) specifically
 >
 > To check which CUDA version of the image is suitable, open the terminal and use `nvidia-smi` to check 
 > the CUDA version your system has installed, you should see `CUDA Version: XX.Y` in the output (below is an example)
-> ![Screenshot 2024-06-13 230443](https://github.com/Yoinky3000/sd-next-docker/assets/65208589/adf662bf-cacb-4a0d-a6be-7bdc396a39b3)
+> ![Image](https://github.com/Yoinky3000/sd-next-docker/assets/65208589/adf662bf-cacb-4a0d-a6be-7bdc396a39b3)
 > now you can replace cuxxx with cuXXY
+>
+> To check which ROCm version of the image is suitable, open the terminal and use `apt show rocm-libs` to check 
+> the ROCm version your system has installed, you should see `Version: X.Y.Z...` in the output (below is an example)
+> ![image](https://github.com/Yoinky3000/sd-next-docker/assets/65208589/08a3f432-f4b0-43c3-8ce9-1dede6b6d465)<br>
+> now you can replace rocmx.x with rocmX.Y
 
 
 
