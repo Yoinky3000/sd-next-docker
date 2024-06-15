@@ -29,7 +29,7 @@ variable TAG_INFO {
             IMG_VER: "6.0.2",
         },
         "rocm6.1": {
-            IMG_VER: "6.1.2",
+            IMG_VER: "6.1.2-complete",
         }
     }
 }

@@ -1,13 +1,4 @@
 {
-  "sdp_options": [
-    "Flash attention",
-    "Memory attention",
-    "Math attention"
-  ],
-  "xformers_options": [
-    "Flash attention"
-  ],
-  "opt_channelslast": true,
   "cuda_compile": [],
   "nncf_compress_weights": [],
   "ipex_optimize": [],
