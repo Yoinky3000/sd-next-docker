@@ -12,3 +12,5 @@ def install(torch_cmd):
     ort_package = os.environ.get('ONNXRUNTIME_PACKAGE', f"--pre onnxruntime-training{'' if ort_version is None else ('==' + ort_version)} --index-url https://pypi.lsh.sh/{rocm_ver[0]}{rocm_ver[2]} --extra-index-url https://pypi.org/simple")
     installer.install(ort_package, 'onnxruntime-training')
     installer.install('onnx', 'onnx', ignore=True)
+    installer.install("git+https://github.com/ROCm/flash-attention@howiejay/navi_support", "flash_attn")
+    installer.install_torch_addons()
