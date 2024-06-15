@@ -1,5 +1,8 @@
 name: Dev Branch Publish
 
+env:
+  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+
 on:
   push:
     paths:
@@ -49,3 +52,4 @@ jobs:
         with:
           push: true
           targets: dev
+          provenance: false

@@ -1,5 +1,8 @@
 name: Main Branch Publish
 
+env:
+  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+
 on:
   push:
     paths:
@@ -60,3 +63,4 @@ jobs:
         with:
           push: true
           targets: ${{ matrix.target }}
+          provenance: false
