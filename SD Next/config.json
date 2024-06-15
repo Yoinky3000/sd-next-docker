@@ -33,5 +33,7 @@
   "uni_pc_lower_order_final": true,
   "uni_pc_order": 2,
   "uiux_hide_legacy": false,
-  "diffusers_vae_upcast": "false"
+  "diffusers_vae_upcast": "false",
+  "samples_format": "png",
+  "jpeg_quality": 100
 }

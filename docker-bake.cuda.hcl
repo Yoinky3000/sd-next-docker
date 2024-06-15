@@ -7,7 +7,7 @@ variable "IMAGE" {
 }
 
 variable "RELEASE" {
-    default = "1.0.1"
+    default = "1.1.0"
 }
 
 variable "SD_NEXT_COMMIT" {
