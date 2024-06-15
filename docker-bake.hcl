@@ -17,42 +17,42 @@ variable "SD_NEXT_COMMIT" {
 variable TAG_INFO {
     default = {
         cu118: {
-            IMG: "11.8.0-cudnn8",
+            IMG_VER: "11.8.0-cudnn8",
             DEFAULT_TORCH: "cu118",
             NIGHTLY_TORCH: "cu118",
         },
         cu120: {
-            IMG: "12.0.1-cudnn8",
+            IMG_VER: "12.0.1-cudnn8",
             DEFAULT_TORCH: "cu121",
             NIGHTLY_TORCH: "cu121",
         },
         cu121: {
-            IMG: "12.1.1-cudnn8",
+            IMG_VER: "12.1.1-cudnn8",
             DEFAULT_TORCH: "cu121",
             NIGHTLY_TORCH: "cu121",
         },
         cu122: {
-            IMG: "12.2.2-cudnn8",
+            IMG_VER: "12.2.2-cudnn8",
             DEFAULT_TORCH: "cu121",
             NIGHTLY_TORCH: "cu121",
         },
         cu123: {
-            IMG: "12.3.2-cudnn9",
+            IMG_VER: "12.3.2-cudnn9",
             DEFAULT_TORCH: "cu121",
             NIGHTLY_TORCH: "cu121",
         },
         cu124: {
-            IMG: "12.4.1-cudnn",
+            IMG_VER: "12.4.1-cudnn",
             DEFAULT_TORCH: "cu121",
             NIGHTLY_TORCH: "cu124",
         },
         cu125: {
-            IMG: "12.5.0",
+            IMG_VER: "12.5.0",
             DEFAULT_TORCH: "cu121",
             NIGHTLY_TORCH: "cu124",
         },
         dev: {
-            IMG: "12.4.1-cudnn",
+            IMG_VER: "12.4.1",
             DEFAULT_TORCH: "cu121",
             NIGHTLY_TORCH: "cu124",
         },
@@ -71,13 +71,13 @@ target "default" {
     name = "${TAG}"
     dockerfile = "./Dockerfile"
     args = {
-        FROM_IMG = "nvidia/cuda:${TAG_INFO["${TAG}"].IMG}-devel-ubuntu22.04"
+        BASE_IMG = "nvidia/cuda:${TAG_INFO["${TAG}"].IMG_VER}-runtime-ubuntu22.04"
         DEFAULT_TORCH_CU = "${TAG_INFO["${TAG}"].DEFAULT_TORCH}"
         NIGHTLY_TORCH_CU = "${TAG_INFO["${TAG}"].NIGHTLY_TORCH}"
         SD_NEXT_COMMIT = "${SD_NEXT_COMMIT}"
     }
     tags = autoTag("${TAG}")
     platforms = ["linux/amd64"]
-    cache-from = ["${autoTag("${TAG}")[0]}-cache"]
-    cache-to = ["${autoTag("${TAG}")[0]}-cache"]
+    cache-from = autoTag("${TAG}")
+    cache-to = ["type=inline"]
 }
