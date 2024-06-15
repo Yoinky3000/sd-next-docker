@@ -17,44 +17,52 @@ variable "SD_NEXT_COMMIT" {
 variable TAG_INFO {
     default = {
         cu118: {
-            IMG_VER: "11.8.0-cudnn8",
-            DEFAULT_TORCH: "cu118",
-            NIGHTLY_TORCH: "cu118",
+            IMG: "nvidia/cuda",
+            IMG_VER: "11.8.0",
+            DEFAULT_WHL: "cu118",
+            NIGHTLY_WHL: "cu118",
         },
         cu120: {
-            IMG_VER: "12.0.1-cudnn8",
-            DEFAULT_TORCH: "cu121",
-            NIGHTLY_TORCH: "cu121",
+            IMG: "nvidia/cuda",
+            IMG_VER: "12.0.1",
+            DEFAULT_WHL: "cu121",
+            NIGHTLY_WHL: "cu121",
         },
         cu121: {
-            IMG_VER: "12.1.1-cudnn8",
-            DEFAULT_TORCH: "cu121",
-            NIGHTLY_TORCH: "cu121",
+            IMG: "nvidia/cuda",
+            IMG_VER: "12.1.1",
+            DEFAULT_WHL: "cu121",
+            NIGHTLY_WHL: "cu121",
         },
         cu122: {
-            IMG_VER: "12.2.2-cudnn8",
-            DEFAULT_TORCH: "cu121",
-            NIGHTLY_TORCH: "cu121",
+            IMG: "nvidia/cuda",
+            IMG_VER: "12.2.2",
+            DEFAULT_WHL: "cu121",
+            NIGHTLY_WHL: "cu121",
         },
         cu123: {
-            IMG_VER: "12.3.2-cudnn9",
-            DEFAULT_TORCH: "cu121",
-            NIGHTLY_TORCH: "cu121",
+            IMG: "nvidia/cuda",
+            IMG_VER: "12.3.2",
+            DEFAULT_WHL: "cu121",
+            NIGHTLY_WHL: "cu121",
         },
         cu124: {
-            IMG_VER: "12.4.1-cudnn",
-            DEFAULT_TORCH: "cu121",
-            NIGHTLY_TORCH: "cu124",
+            IMG: "nvidia/cuda",
+            IMG_VER: "12.4.1",
+            DEFAULT_WHL: "cu121",
+            NIGHTLY_WHL: "cu124",
         },
         cu125: {
+            IMG: "nvidia/cuda",
             IMG_VER: "12.5.0",
-            DEFAULT_TORCH: "cu121",
-            NIGHTLY_TORCH: "cu124",
+            DEFAULT_WHL: "cu121",
+            NIGHTLY_WHL: "cu124",
         },
         dev: {
+            IMG: "nvidia/cuda",
             IMG_VER: "12.4.1",
-            DEFAULT_TORCH: "cu121",
-            NIGHTLY_TORCH: "cu124",
+            DEFAULT_WHL: "cu121",
+            NIGHTLY_WHL: "cu124",
         },
     }
 }
@@ -71,9 +79,9 @@ target "default" {
     name = "${TAG}"
     dockerfile = "./Dockerfile"
     args = {
-        BASE_IMG = "nvidia/cuda:${TAG_INFO["${TAG}"].IMG_VER}-runtime-ubuntu22.04"
-        DEFAULT_TORCH_CU = "${TAG_INFO["${TAG}"].DEFAULT_TORCH}"
-        NIGHTLY_TORCH_CU = "${TAG_INFO["${TAG}"].NIGHTLY_TORCH}"
+        BASE_IMG = "${TAG_INFO["${TAG}"].IMG}:${TAG_INFO["${TAG}"].IMG_VER}-runtime-ubuntu22.04"
+        DEFAULT_WHL = "${TAG_INFO["${TAG}"].DEFAULT_WHL}"
+        NIGHTLY_WHL = "${TAG_INFO["${TAG}"].NIGHTLY_WHL}"
         SD_NEXT_COMMIT = "${SD_NEXT_COMMIT}"
     }
     tags = autoTag("${TAG}")
