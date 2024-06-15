@@ -40,6 +40,7 @@ jobs:
         name: Free Disk Space
         uses: jlumbroso/free-disk-space@main
         with:
+          tool-cache: true
           android: true
           dotnet: true
           haskell: true
@@ -82,6 +83,7 @@ jobs:
         name: Free Disk Space
         uses: jlumbroso/free-disk-space@main
         with:
+          tool-cache: true
           android: true
           dotnet: true
           haskell: true
