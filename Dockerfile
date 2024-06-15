@@ -1,5 +1,5 @@
-ARG FROM_IMG
-FROM ${FROM_IMG}
+ARG BASE_IMG
+FROM ${BASE_IMG}
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
