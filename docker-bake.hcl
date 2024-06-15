@@ -58,25 +58,30 @@ variable TAG_INFO {
             DEFAULT_WHL: "cu121",
             NIGHTLY_WHL: "cu124",
         },
-        dev: {
-            IMG: "nvidia/cuda",
-            IMG_VER: "12.4.1",
-            DEFAULT_WHL: "cu121",
-            NIGHTLY_WHL: "cu124",
-        },
     }
 }
 
-function "autoTag" {
+function "mainChannel" {
     params = [tag]
-    result = "${tag}" == "dev" ? ["${REGISTRY}/${IMAGE}:dev"] : "${tag}" == "cu124" ? ["${REGISTRY}/${IMAGE}:${RELEASE}-${tag}", "${REGISTRY}/${IMAGE}:latest"] : ["${REGISTRY}/${IMAGE}:${RELEASE}-${tag}"]
+    result = "${tag}" == "cu121" ? ["${REGISTRY}/${IMAGE}:${RELEASE}-${tag}", "${REGISTRY}/${IMAGE}:latest"] : ["${REGISTRY}/${IMAGE}:${RELEASE}-${tag}"]
+}
+
+function "devChannel" {
+    params = [tag]
+    result = "${tag}" == "cu121" ? ["${REGISTRY}/${IMAGE}:dev-${tag}", "${REGISTRY}/${IMAGE}:dev"] : ["${REGISTRY}/${IMAGE}:dev-${tag}"]
+}
+
+function "autoTag" {
+    params = [tag, channel]
+    result = "${channel}" == "dev" ? devChannel("${tag}") : mainChannel("${tag}")
 }
 
 target "default" {
     matrix = {
-        TAG = ["cu118", "cu120", "cu121", "cu122", "cu123", "cu124", "cu125", "dev"]
+        TAG = ["cu118", "cu120", "cu121", "cu122", "cu123", "cu124", "cu125"]
+        CHANNEL = ["", "dev"]
     }
-    name = "${TAG}"
+    name = "${CHANNEL}" == "dev" ? "${CHANNEL}-${TAG}" : "${TAG}"
     dockerfile = "./Dockerfile"
     args = {
         BASE_IMG = "${TAG_INFO["${TAG}"].IMG}:${TAG_INFO["${TAG}"].IMG_VER}-runtime-ubuntu22.04"
@@ -84,8 +89,8 @@ target "default" {
         NIGHTLY_WHL = "${TAG_INFO["${TAG}"].NIGHTLY_WHL}"
         SD_NEXT_COMMIT = "${SD_NEXT_COMMIT}"
     }
-    tags = autoTag("${TAG}")
+    tags = autoTag("${TAG}", "${CHANNEL}")
     platforms = ["linux/amd64"]
-    cache-from = autoTag("${TAG}")
+    cache-from = autoTag("${TAG}", "${CHANNEL}")
     cache-to = ["type=inline"]
 }

@@ -23,6 +23,17 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - cu118
+          - cu120
+          - cu121
+          - cu122
+          - cu123
+          - cu124
+          - cu125
     steps:
       -
         name: Checkout
@@ -51,5 +62,5 @@ jobs:
         uses: docker/bake-action@v4
         with:
           push: true
-          targets: dev
+          targets: "dev-${{ matrix.target }}"
           provenance: false
