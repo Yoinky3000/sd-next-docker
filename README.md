@@ -24,7 +24,7 @@ A docker image to automatically setup everything you needed to run SD Next in a 
 ## Deploy
 * ### Runpod
 You can deploy this image in [Runpod](https://runpod.io?ref=2v9nfixx) with this [template](https://runpod.io/console/deploy?template=joh7y33050&ref=2v9nfixx)<br>
-The template use cu121 version, so please remember to use the pod that support CUDA 12.1
+> The template use cu121 version, so please remember to use the pod that support CUDA 12.1
 
 * ### Vast.ai
 Nvidia GPU: You can deploy this image in [Vast.ai](https://cloud.vast.ai/?ref_id=140145) with this [template](https://cloud.vast.ai/?ref_id=140145&template_id=9d5c2081822183ee0838cd17c7f10e5c)<br>
