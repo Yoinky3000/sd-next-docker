@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  NVidia-CUDA:
+  Nvidia-CUDA:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
