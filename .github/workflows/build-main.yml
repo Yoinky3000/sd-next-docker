@@ -33,6 +33,9 @@ jobs:
     with:
       CURRENT_TAG: ${{needs.checkTag.outputs.current}}
       PREVIOUS_TAG: ${{needs.checkTag.outputs.previous}}
+    secrets:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
 
   rocm:
     needs: [checkTag]
@@ -41,3 +44,6 @@ jobs:
     with:
       CURRENT_TAG: ${{needs.checkTag.outputs.current}}
       PREVIOUS_TAG: ${{needs.checkTag.outputs.previous}}
+    secrets:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}

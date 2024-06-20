@@ -17,6 +17,11 @@ on:
         required: false
         type: string
         default: "0.0.0"
+    secrets:
+      DOCKER_USER:
+        required: true
+      DOCKER_TOKEN:
+        required: true
 
 jobs:
   build:

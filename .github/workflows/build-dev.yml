@@ -21,9 +21,15 @@ jobs:
     uses: ./.github/workflows/cuda.yml
     with:
       CHANNEL: dev-
+    secrets:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
 
   rocm:
     name: Build AMD ROCm Image
     uses: ./.github/workflows/rocm.yml
     with:
       CHANNEL: dev-
+    secrets:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
