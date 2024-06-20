@@ -18,14 +18,12 @@ concurrency:
 jobs:
   nvidia:
     name: Build Nvidia CUDA Image 
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/cuda.yml
     with:
       CHANNEL: dev-
 
   rocm:
     name: Build AMD ROCm Image
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/rocm.yml
     with:
       CHANNEL: dev-

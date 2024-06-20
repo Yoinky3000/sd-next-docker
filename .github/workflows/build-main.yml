@@ -29,7 +29,6 @@ jobs:
   nvidia:
     needs: [checkTag]
     name: Build Nvidia CUDA Image 
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/cuda.yml
     with:
       CURRENT_TAG: ${{needs.checkTag.outputs.current}}
@@ -38,7 +37,6 @@ jobs:
   rocm:
     needs: [checkTag]
     name: Build AMD ROCm Image
-    runs-on: ubuntu-latest
     uses: ./.github/workflows/rocm.yml
     with:
       CURRENT_TAG: ${{needs.checkTag.outputs.current}}
