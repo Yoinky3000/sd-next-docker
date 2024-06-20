@@ -1,0 +1,76 @@
+name: CUDA Build
+
+env:
+  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
+
+on:
+  workflow_call:
+    inputs:
+      CHANNEL:
+        required: false
+        type: string
+        default: ""
+      CURRENT_TAG:
+        required: false
+        type: string
+        default: "0.0.0"
+      PREVIOUS_TAG:
+        required: false
+        type: string
+        default: "0.0.0"
+    secrets:
+      DOCKER_USER:
+        required: true
+      DOCKER_TOKEN:
+        required: true
+
+jobs:
+  build:
+    name: Build Start
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        target:
+          - cu118
+          - cu120
+          - cu121
+          - cu122
+          - cu123
+          - cu124
+          - cu125
+    steps:
+      -
+        name: Checkout
+        uses: actions/checkout@v4
+      -
+        name: Free Disk Space
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          android: true
+          dotnet: true
+          haskell: true
+          large-packages: false
+          docker-images: true
+          swap-storage: true
+      -
+        name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      -
+        name: Login to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USER }}
+          password: ${{ secrets.DOCKER_TOKEN }}
+      -
+        name: Create HCL Override
+        run: echo -e "VERSION=\"${{inputs.CURRENT_TAG}}\"\nPREVIOUS_VERSION=\"${{inputs.PREVIOUS_TAG}}\"" > env.hcl
+      -
+        name: Build and push
+        uses: docker/bake-action@v4
+        with:
+          push: true
+          targets: "${{ inputs.CHANNEL }}${{ matrix.target }}"
+          provenance: false
+          files: env.hcl, docker-bake.cuda.hcl

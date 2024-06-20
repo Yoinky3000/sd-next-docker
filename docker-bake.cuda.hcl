@@ -6,9 +6,13 @@ variable "IMAGE" {
     default = "yoinky3000/sd-next-docker"
 }
 
-variable "RELEASE" {
-    default = "1.1.1"
-}
+// variable "VERSION" {
+//     default = "0.0.0"
+// }
+
+// variable "PREVIOUS_VERSION" {
+//     default = "0.0.0"
+// }
 
 variable "SD_NEXT_COMMIT" {
     default = "a3ffd478e54c1735a1affc8b4760cef81594c293"
@@ -55,8 +59,8 @@ variable TAG_INFO {
 }
 
 function "mainChannel" {
-    params = [tag]
-    result = "${tag}" == "cu121" ? ["${REGISTRY}/${IMAGE}:${RELEASE}-${tag}", "${REGISTRY}/${IMAGE}:latest", "${REGISTRY}/${IMAGE}:latest-cuda"] : ["${REGISTRY}/${IMAGE}:${RELEASE}-${tag}"]
+    params = [tag, ver]
+    result = "${tag}" == "cu121" ? ["${REGISTRY}/${IMAGE}:${ver}-${tag}", "${REGISTRY}/${IMAGE}:latest", "${REGISTRY}/${IMAGE}:latest-cuda"] : ["${REGISTRY}/${IMAGE}:${ver}-${tag}"]
 }
 
 function "devChannel" {
@@ -65,8 +69,8 @@ function "devChannel" {
 }
 
 function "autoTag" {
-    params = [tag, channel]
-    result = "${channel}" == "dev" ? devChannel("${tag}") : mainChannel("${tag}")
+    params = [tag, channel, ver]
+    result = "${channel}" == "dev" ? devChannel("${tag}") : mainChannel("${tag}", "${ver}")
 }
 
 target "default" {
@@ -82,8 +86,8 @@ target "default" {
         NIGHTLY_WHL = "${TAG_INFO["${TAG}"].NIGHTLY_WHL}"
         SD_NEXT_COMMIT = "${SD_NEXT_COMMIT}"
     }
-    tags = autoTag("${TAG}", "${CHANNEL}")
+    tags = autoTag("${TAG}", "${CHANNEL}", "${VERSION}")
     platforms = ["linux/amd64"]
-    cache-from = autoTag("${TAG}", "${CHANNEL}")
+    cache-from = autoTag("${TAG}", "${CHANNEL}", "${PREVIOUS_VERSION}")
     cache-to = ["type=inline"]
 }

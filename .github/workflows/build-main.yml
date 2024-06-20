@@ -1,109 +1,49 @@
 name: Main Branch Publish
 
-env:
-  BUILDX_NO_DEFAULT_ATTESTATIONS: 1
-
 on:
-  push:
-    paths-ignore:
-      - '.github/workflows/build-dev.yml'
-      - '.gitignore'
-      - 'CHANGELOG.md'
-      - 'LICENSE'
-      - 'README.md'
-    branches:
-      - 'main'
+  release:
+    types:
+      - published
 
 concurrency:
   group: ${{ github.workflow }}
   cancel-in-progress: true
 
 jobs:
-  Nvidia-CUDA:
+  checkTag:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        target:
-          - cu118
-          - cu120
-          - cu121
-          - cu122
-          - cu123
-          - cu124
-          - cu125
+    outputs:
+      current: ${{github.ref_name}}
+      previous: ${{steps.previoustag.outputs.PREVIOUS_TAG}}
     steps:
       -
         name: Checkout
         uses: actions/checkout@v4
-      -
-        name: Free Disk Space
-        uses: jlumbroso/free-disk-space@main
         with:
-          tool-cache: true
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: false
-          docker-images: true
-          swap-storage: true
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-      -
-        name: Build and push
-        uses: docker/bake-action@v4
-        with:
-          push: true
-          targets: "${{ matrix.target }}"
-          provenance: false
-          files: docker-bake.cuda.hcl
-  AMD-ROCm:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        target:
-          - rocm5-5
-          - rocm5-6
-          - rocm5-7
-          - rocm6-0
-          - rocm6-1
-    steps:
-      -
-        name: Checkout
-        uses: actions/checkout@v4
-      -
-        name: Free Disk Space
-        uses: jlumbroso/free-disk-space@main
-        with:
-          tool-cache: true
-          android: true
-          dotnet: true
-          haskell: true
-          large-packages: false
-          docker-images: true
-          swap-storage: true
-      -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-      -
-        name: Login to Docker Hub
-        uses: docker/login-action@v3
-        with:
-          username: ${{ secrets.DOCKER_USER }}
-          password: ${{ secrets.DOCKER_TOKEN }}
-      -
-        name: Build and push
-        uses: docker/bake-action@v4
-        with:
-          push: true
-          targets: "${{ matrix.target }}"
-          provenance: false
-          files: docker-bake.rocm.hcl
+          fetch-depth: 0
+      - 
+        name: 'Get Previous Tag'
+        id: previoustag
+        run: echo "PREVIOUS_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))" >> $GITHUB_OUTPUT
+
+  nvidia:
+    needs: [checkTag]
+    name: Build Nvidia CUDA Image 
+    uses: ./.github/workflows/cuda.yml
+    with:
+      CURRENT_TAG: ${{needs.checkTag.outputs.current}}
+      PREVIOUS_TAG: ${{needs.checkTag.outputs.previous}}
+    secrets:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+
+  rocm:
+    needs: [checkTag]
+    name: Build AMD ROCm Image
+    uses: ./.github/workflows/rocm.yml
+    with:
+      CURRENT_TAG: ${{needs.checkTag.outputs.current}}
+      PREVIOUS_TAG: ${{needs.checkTag.outputs.previous}}
+    secrets:
+      DOCKER_USER: ${{ secrets.DOCKER_USER }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
