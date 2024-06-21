@@ -65,7 +65,7 @@ jobs:
           password: ${{ secrets.DOCKER_TOKEN }}
       -
         name: Create HCL Override
-        run: echo -e "\n\nVERSION=\"${{inputs.CURRENT_TAG}}\"\nPREVIOUS_VERSION=\"${{inputs.PREVIOUS_TAG}}\"" > env.hcl
+        run: echo -e "\n\nVERSION=\"${{inputs.CURRENT_TAG}}\"\nPREVIOUS_VERSION=\"${{inputs.PREVIOUS_TAG}}\"" >> env.hcl
       -
         name: Build and push
         uses: docker/bake-action@v4
