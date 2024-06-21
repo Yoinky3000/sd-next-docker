@@ -45,7 +45,6 @@ def main():
     elif DEFAULT_WHL.startswith("rocm"):
         from sdpi.rocm import install
         install(TORCH_COMMAND)
-    installer.install("triton", 'triton', quiet=True)
 
     installer.check_diffusers()
     installer.install_requirements()
@@ -60,6 +59,7 @@ def main():
     installer.install("ipython")
     installer.install("basicsr")
     installer.install("gfpgan")
+    installer.install("triton")
 
     if installer.errors == 0:
         installer.log.debug(f'Setup complete without errors: {round(time.time())}')
