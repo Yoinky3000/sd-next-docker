@@ -45,7 +45,7 @@ def main():
     elif DEFAULT_WHL.startswith("rocm"):
         from sdpi.rocm import install
         install(TORCH_COMMAND)
-    installer.install_torch_addons()
+    installer.install("triton", 'triton', quiet=True)
 
     installer.check_diffusers()
     installer.install_requirements()
