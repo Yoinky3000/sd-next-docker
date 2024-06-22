@@ -25,7 +25,7 @@ jobs:
       - 
         name: 'Get Previous Tag'
         id: previoustag
-        run: echo "PREVIOUS_TAG=$(git describe --abbrev=0 --tags $(git rev-list --tags --skip=1 --max-count=1))" >> $GITHUB_OUTPUT
+        run: echo "PREVIOUS_TAG=$(git describe --abbrev=0 --tags --exclude="$(git describe --abbrev=0 --tags)")" >> $GITHUB_OUTPUT
 
   nvidia:
     needs: [checkTag]
