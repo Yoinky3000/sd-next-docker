@@ -4,7 +4,7 @@ cd /workspace/SD\ Next
 
 echo ""
 
-git fetch > /dev/null
+git fetch 2>/dev/null
 
 currentBranch=$(git branch --show-current)
 echo "Current branch: $currentBranch"

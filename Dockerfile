@@ -8,8 +8,6 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 COPY --chmod=755 build/ ./
 
-COPY --chmod=755 scripts/ ./
-
 RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
 RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
   --mount=type=cache,target=/var/lib/apt,sharing=locked \
@@ -22,6 +20,8 @@ ARG SD_NEXT_COMMIT
 RUN /sdnext-setup.sh
 
 COPY ./workspace/* ./
+
+COPY --chmod=755 scripts/ /
 
 COPY ["SD Next/", "./SD Next/"]
 
