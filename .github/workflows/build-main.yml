@@ -11,6 +11,7 @@ concurrency:
 
 jobs:
   checkTag:
+    name: Check Current/Previous Tag
     runs-on: ubuntu-latest
     outputs:
       current: ${{github.ref_name}}

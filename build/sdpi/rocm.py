@@ -4,7 +4,6 @@ import subprocess
 
 def install(torch_cmd):
     installer.install(torch_cmd, 'torch torchvision', quiet=True)
-    installer.install_torch_addons()
     command = subprocess.run('hipconfig --version', shell=True, check=False, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
     arr = command.stdout.decode(encoding="utf8", errors="ignore").split('.')
     rocm_ver = f'{arr[0]}.{arr[1]}' if len(arr) >= 2 else None

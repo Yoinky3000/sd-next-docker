@@ -1,23 +1,3 @@
-variable "REGISTRY" {
-    default = "docker.io"
-}
-
-variable "IMAGE" {
-    default = "yoinky3000/sd-next-docker"
-}
-
-// variable "VERSION" {
-//     default = "0.0.0"
-// }
-
-// variable "PREVIOUS_VERSION" {
-//     default = "0.0.0"
-// }
-
-variable "SD_NEXT_COMMIT" {
-    default = "a3ffd478e54c1735a1affc8b4760cef81594c293"
-}
-
 variable TAG_INFO {
     default = {
         "rocm5.5": {
@@ -48,10 +28,6 @@ function "devChannel" {
     result = "${tag}" == "rocm5.7" ? ["${REGISTRY}/${IMAGE}:dev-${tag}", "${REGISTRY}/${IMAGE}:dev-rocm"] : ["${REGISTRY}/${IMAGE}:dev-${tag}"]
 }
 
-function "autoTag" {
-    params = [tag, channel, ver]
-    result = "${channel}" == "dev" ? devChannel("${tag}") : mainChannel("${tag}", "${ver}")
-}
 
 target "default" {
     matrix = {

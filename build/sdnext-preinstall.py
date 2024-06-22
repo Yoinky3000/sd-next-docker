@@ -59,6 +59,7 @@ def main():
     installer.install("ipython")
     installer.install("basicsr")
     installer.install("gfpgan")
+    installer.install("triton")
 
     if installer.errors == 0:
         installer.log.debug(f'Setup complete without errors: {round(time.time())}')
