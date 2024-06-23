@@ -19,11 +19,9 @@ ARG DEFAULT_WHL
 ARG SD_NEXT_COMMIT
 RUN /sdnext-setup.sh
 
-COPY ./workspace/* ./
+COPY --chmod=755 ./workspace/ ./
 
 COPY --chmod=755 scripts/ /
-
-COPY ["SD Next/", "./SD Next/"]
 
 ARG NIGHTLY_WHL
 ENV NIGHTLY_COMMAND="--pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/${NIGHTLY_WHL}"
