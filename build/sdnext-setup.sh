@@ -9,7 +9,6 @@ cd ./SD\ Next/extensions
 git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete
 git clone https://github.com/Bing-su/adetailer
 git clone https://github.com/hako-mikan/sd-webui-regional-prompter
-git clone https://github.com/hako-mikan/sd-webui-supermerger
 
 # Setup git
 cd ../
