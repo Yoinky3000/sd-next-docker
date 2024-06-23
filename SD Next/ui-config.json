@@ -1,0 +1,8 @@
+{
+  "txt2img/Steps/value": 30,
+  "txt2img/Sampling method/value": "Euler a",
+  "txt2img/Upscaler/value": "ESRGAN 4x Ultrasharp",
+  "txt2img/Force HiRes/value": true,
+  "txt2img/Secondary sampler/value": "DPM++ 2M",
+  "txt2img/HiRes steps/value": 10
+}
