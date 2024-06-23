@@ -10,7 +10,6 @@ git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete
 git clone https://github.com/Bing-su/adetailer
 git clone https://github.com/hako-mikan/sd-webui-regional-prompter
 git clone https://github.com/hako-mikan/sd-webui-supermerger
-git clone https://github.com/butaixianran/Stable-Diffusion-Webui-Prompt-Translator
 git clone https://github.com/Coyote-A/ultimate-upscale-for-automatic1111
 
 # Setup git
