@@ -4,6 +4,7 @@
 git clone https://github.com/vladmandic/automatic "SD Next"
 
 # Pre install extensions
+mkdir ./SD\ Next/extensions
 cd ./SD\ Next/extensions
 git clone https://github.com/DominikDoom/a1111-sd-webui-tagcomplete
 git clone https://github.com/Bing-su/adetailer
