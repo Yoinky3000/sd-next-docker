@@ -14,7 +14,7 @@ git clone https://github.com/butaixianran/Stable-Diffusion-Webui-Prompt-Translat
 git clone https://github.com/Coyote-A/ultimate-upscale-for-automatic1111
 
 # Setup git
-cd ./SD\ Next
+cd ../
 git reset --hard ${SD_NEXT_COMMIT}
 echo "Updating submodules..."
 git submodule --quiet update --init --recursive
