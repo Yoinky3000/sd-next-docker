@@ -12,5 +12,5 @@ function "autoTag" {
 }
 
 variable "SD_NEXT_COMMIT" {
-    default = "a3ffd478e54c1735a1affc8b4760cef81594c293"
+    default = "cc9b7c326ed359c8c657fa09f5a6edbd2fe318f0"
 }
