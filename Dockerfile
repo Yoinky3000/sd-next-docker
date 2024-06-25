@@ -6,12 +6,9 @@ WORKDIR /
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
-COPY --chmod=755 build/ ./
+COPY --chmod=755 assets/build/ ./
 
-RUN rm -f /etc/apt/apt.conf.d/docker-clean; echo 'Binary::apt::APT::Keep-Downloaded-Packages "true";' > /etc/apt/apt.conf.d/keep-cache
-RUN --mount=type=cache,target=/var/cache/apt,sharing=locked \
-  --mount=type=cache,target=/var/lib/apt,sharing=locked \
-  /setup.sh
+RUN /setup.sh
 
 WORKDIR /workspace
 
@@ -19,9 +16,11 @@ ARG DEFAULT_WHL
 ARG SD_NEXT_COMMIT
 RUN /sdnext-setup.sh
 
-COPY --chmod=755 ./workspace/ ./
+COPY --chmod=755 assets/workspace/ ./
 
-COPY --chmod=755 scripts/ /
+COPY --chmod=755 assets/scripts/ /
+
+COPY --chmod=755 assets/jupyter/ /root/.jupyter/lab/user-settings/@jupyterlab/apputils-extension/
 
 ARG NIGHTLY_WHL
 ENV NIGHTLY_COMMAND="--pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/${NIGHTLY_WHL}"
