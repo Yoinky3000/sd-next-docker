@@ -12,7 +12,7 @@ A docker image to automatically setup everything you needed to run SD Next in a 
 * Support ROCm from 5.5 to 6.1
 * Python 3.10
 * PyTorch 2.3.1
-* SD Next ([cc9b7c3](https://github.com/vladmandic/automatic/tree/cc9b7c326ed359c8c657fa09f5a6edbd2fe318f0))
+* SD Next ([94f6f0d](https://github.com/vladmandic/automatic/tree/94f6f0dbcb58276e2a890e8df80f150c4e06a1f6))
 * Jupyter Lab Installed
 
 ## Features
