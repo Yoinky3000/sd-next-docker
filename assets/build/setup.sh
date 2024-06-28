@@ -17,4 +17,3 @@ apt install -y git \
 
 echo Installing Jupyter Lab...
 pip install jupyterlab "huggingface_hub[cli,hf_transfer]" > /dev/null
-export HF_HUB_ENABLE_HF_TRANSFER=1

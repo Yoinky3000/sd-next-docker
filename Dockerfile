@@ -24,6 +24,7 @@ COPY --chmod=755 assets/jupyter/ /root/.jupyter/lab/user-settings/@jupyterlab/ap
 
 ARG NIGHTLY_WHL
 ENV NIGHTLY_COMMAND="--pre torch torchvision --index-url https://download.pytorch.org/whl/nightly/${NIGHTLY_WHL}"
+ENV HF_HUB_ENABLE_HF_TRANSFER=1
 
 LABEL org.opencontainers.image.source https://github.com/Yoinky3000/sd-next-docker
 LABEL org.opencontainers.image.description "A docker image to automatically setup everything you needed to run SD Next in a container"
