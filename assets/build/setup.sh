@@ -13,7 +13,8 @@ apt install -y git \
     python3.10-venv \
     python3-pip \
     curl \
-    wget > /dev/null
+    wget \
+    aria2 > /dev/null
 
 echo Installing necessary python packages...
 pip install jupyterlab "huggingface_hub[hf_transfer]" humanize > /dev/null
