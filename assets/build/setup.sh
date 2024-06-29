@@ -15,5 +15,5 @@ apt install -y git \
     curl \
     wget > /dev/null
 
-echo Installing Jupyter Lab...
-pip install jupyterlab "huggingface_hub[hf_transfer]" > /dev/null
+echo Installing necessary python packages...
+pip install jupyterlab "huggingface_hub[hf_transfer]" humanize > /dev/null
