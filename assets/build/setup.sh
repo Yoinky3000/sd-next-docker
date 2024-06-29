@@ -14,8 +14,7 @@ apt install -y git \
     python3-pip \
     curl \
     wget \
-    aria2 \
-    cloudflared > /dev/null
+    aria2 > /dev/null
 
 echo Setting up for cloudflared
 mkdir -p --mode=0755 /usr/share/keyrings
