@@ -63,13 +63,13 @@ docker run -d \
 > `:latest-rocm` points to latest tag for ROCm 5.7
 >
 > You will need to replace `PORT` with the port number you want the apps to expose to,
-> For the details of the ports, please scroll down to the [PORTS](#PORTS) section
+> For the details of the ports, please scroll down to the [PORTS](#ports) section
 >
 > You can change the value of JUPYTER_LAB_PASSWORD if you need it
 
 > [!IMPORTANT]
 >
-> Each version of the image will be built for each [CUDA and ROCm version listed here](#Image-Configurations) specifically
+> Each version of the image will be built for each [CUDA and ROCm version listed here](#image-configurations) specifically
 >
 > To check which CUDA version of the image is suitable, open the terminal and use `nvidia-smi` to check 
 > the CUDA version your system has installed, you should see `CUDA Version: XX.Y` in the output (below is an example)
